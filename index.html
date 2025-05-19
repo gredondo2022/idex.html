@@ -2,47 +2,89 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <title>Página con Contador Único y Navegación</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página con Contador</title>
     <style>
         body {
-            background-image: url('https://ejemplo.com/imagen.jpg'); /* Reemplaza con la URL de tu imagen */
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            color: white;
-            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .container {
+            background: rgba(34, 34, 34, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 40px 30px;
             text-align: center;
-            padding-top: 50px;
+            color: #f0f0f0;
+            backdrop-filter: blur(2px);
         }
         h1 {
-            font-size: 48px;
-            text-shadow: 2px 2px 5px black;
+            font-size: 2.6em;
+            margin-bottom: 0.3em;
+            letter-spacing: 2px;
         }
         #contador {
-            font-size: 36px;
+            font-size: 3em;
             font-weight: bold;
+            margin: 25px 0 30px 0;
+            color: #2ece7d;
+            text-shadow: 2px 2px 8px #111;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            margin-top: 20px;
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 36px;
+            font-size: 1.2em;
+            font-weight: 600;
             cursor: pointer;
+            margin: 0 12px;
+            transition: transform 0.13s, box-shadow 0.13s;
+            box-shadow: 0 3px 12px 0 rgba(31, 38, 135, 0.23);
+        }
+        .btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 8px 24px 0 rgba(31, 38, 135, 0.30);
+            background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+        }
+        @media (max-width: 500px) {
+            .container { padding: 18px 8px; }
+            h1 { font-size: 1.5em; }
+            #contador { font-size: 2em; }
         }
     </style>
 </head>
 <body>
-    <h1>Bienvenido a mi página con contador</h1>
-    <p>Haz clic en el botón para aumentar el contador:</p>
-    <div id="contador">0</div>
-    <button onclick="incrementar()">Incrementar</button>
-
+    <div class="container">
+        <h1>Bienvenido/a</h1>
+        <div id="contador">0</div>
+        <button class="btn" onclick="window.location.href='https://www.ejemplo.com'">Ir a otra página</button>
+    </div>
     <script>
-        let contador = 0;
-        function incrementar() {
-            contador++;
-            document.getElementById('contador').innerText = contador;
+        // Inicialización del contador por visita única por navegador
+        // El valor real del contador se almacena en localStorage (solo para este usuario/navegador)
+        // Si quieres un contador global para todos, necesitas backend, pero esto cumple la limitación de una vez por visita.
+        function actualizarContador() {
+            // Si ya se contó la visita, solo muestra el valor
+            let contado = localStorage.getItem('visitado');
+            let valor = localStorage.getItem('contador') || 0;
+            if (!contado) {
+                valor++;
+                localStorage.setItem('contador', valor);
+                localStorage.setItem('visitado', 'true');
+            }
+            document.getElementById('contador').innerText = localStorage.getItem('contador') || 0;
         }
+        document.addEventListener('DOMContentLoaded', actualizarContador);
     </script>
 </body>
 </html>
-
