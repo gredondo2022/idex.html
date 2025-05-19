@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página con Contador</title>
+    <style>
+        body {
+            background-image: url('https://ejemplo.com/imagen.jpg'); /* Reemplaza con la URL de tu imagen */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            font-size: 48px;
+            text-shadow: 2px 2px 5px black;
+        }
+        #contador {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a mi página con contador</h1>
+    <p>Haz clic en el botón para aumentar el contador:</p>
+    <div id="contador">0</div>
+    <button onclick="incrementar()">Incrementar</button>
+
+    <script>
+        let contador = 0;
+        function incrementar() {
+            contador++;
+            document.getElementById('contador').innerText = contador;
+        }
+    </script>
+</body>
+</html>
 
